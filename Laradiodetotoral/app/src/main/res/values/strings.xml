@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">La radio de Totoral</string>
     <string name="action_settings">Settings</string>
+    <string name="str_loading">Cargando...</string>
+    <string name="str_loadingNews">Cargando últimas noticias...</string>
+    <string name="str_lastNews">Últimas Noticias</string>
 </resources>

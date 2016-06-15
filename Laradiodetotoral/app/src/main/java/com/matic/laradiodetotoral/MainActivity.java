@@ -1,12 +1,22 @@
 package com.matic.laradiodetotoral;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,21 +33,24 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = "ForegroundService";
+
+    public static final int NOTIFICATION_ID = 1;
+    private NotificationManager mNotificationManager;
+    NotificationCompat.Builder builder;
+
     private Button btnPrev;
     private Button btnPlay;
     private Button btnNext;
 
     private FloatingActionButton fab;
 
-    private TextView tvTime;
 
     private boolean playPause;
     private MediaPlayer mediaPlayer;
     private boolean intialStage = true;
 
     private RecyclerView recyclerView;
-
-
 
 
     @Override
@@ -53,12 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        btnPlay= (Button) findViewById(R.id.btn_play);
+        btnPlay = (Button) findViewById(R.id.btn_play);
         btnPlay.setOnClickListener(pausePlay);
 
 
-
-        btnPrev= (Button) findViewById(R.id.btn_prev);
+        btnPrev = (Button) findViewById(R.id.btn_prev);
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,10 +85,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.reciclador);
         recyclerView.setHasFixedSize(true);
 
-        ReadRSS readRSS=new ReadRSS(this,recyclerView);
+        ReadRSS readRSS = new ReadRSS(this, recyclerView);
         readRSS.execute();
-
-
 
 
     }
@@ -88,28 +98,33 @@ public class MainActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             // TODO Auto-generated method stub
 
-            if (!playPause) {
-                btnPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
-                fab.setImageResource(android.R.drawable.ic_media_pause);
+            actionPausePlay();
 
-                if (intialStage)
-                    new Player()
-                            .execute(Constants.URL_STREAM);
-                else {
-                    if (!mediaPlayer.isPlaying())
-                        mediaPlayer.start();
-                }
-                playPause = true;
-            } else {
-                btnPlay.setBackgroundResource(android.R.drawable.ic_media_play);
-                fab.setImageResource(android.R.drawable.ic_media_play);
-                if (mediaPlayer.isPlaying())
-                    mediaPlayer.pause();
-                playPause = false;
-            }
         }
     };
 
+
+    public void actionPausePlay() {
+        if (!playPause) {
+            btnPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+            fab.setImageResource(android.R.drawable.ic_media_pause);
+
+            if (intialStage)
+                new Player()
+                        .execute(Constants.URL_STREAM);
+            else {
+                if (!mediaPlayer.isPlaying())
+                    mediaPlayer.start();
+            }
+            playPause = true;
+        } else {
+            btnPlay.setBackgroundResource(android.R.drawable.ic_media_play);
+            fab.setImageResource(android.R.drawable.ic_media_play);
+            if (mediaPlayer.isPlaying())
+                mediaPlayer.pause();
+            playPause = false;
+        }
+    }
 
 
     @Override
@@ -135,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     class Player extends AsyncTask<String, Void, Boolean> {
         private ProgressDialog progress;
 
@@ -153,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onCompletion(MediaPlayer mp) {
                         // TODO Auto-generated method stub
                         intialStage = true;
-                        playPause=false;
+                        playPause = false;
                         btnPlay.setBackgroundResource(android.R.drawable.ic_media_play);
                         fab.setImageResource(android.R.drawable.ic_media_play);
                         mediaPlayer.stop();
@@ -187,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            this.progress.setMessage("Cargando...");
+            this.progress.setMessage(getString(R.string.str_loading));
             this.progress.show();
 
         }
@@ -203,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Prepared", "//" + result);
             mediaPlayer.start();
             intialStage = false;
+
+
         }
 
         public Player() {
@@ -213,19 +229,100 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
-        if (mediaPlayer != null) {
+        /*if (mediaPlayer != null) {
             mediaPlayer.reset();
             mediaPlayer.release();
             mediaPlayer = null;
-        }
-    }
-    */
+        }*/
 
+
+        if (!intialStage) {
+
+            Intent startIntent = new Intent(this, MainActivity.class);
+            startIntent.setAction(Constants.ACTION.STARTFOREGROUND_ACTION);
+            startService(startIntent);
+
+            buildNotification(startIntent);
+
+
+        }
+
+
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void buildNotification(Intent intent) {
+
+        if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION)) {
+
+
+            Notification.Builder mBuilder;
+            mNotificationManager = (NotificationManager) this
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+            //Notification.MediaStyle style = new Notification.MediaStyle();
+
+
+            Intent notificationIntent = new Intent(this, MainActivity.class);
+            notificationIntent.setAction(Constants.ACTION.MAIN_ACTION);
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                    notificationIntent, 0);
+
+
+            Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                    R.mipmap.ic_launcher);
+
+
+            Intent playIntent = new Intent(this, MainActivity.class);
+            playIntent.setAction(Constants.ACTION.PLAY_ACTION);
+            PendingIntent pplayIntent = PendingIntent.getService(this, 0,
+                    playIntent, 0);
+
+
+            if (playPause) {
+                //llamar al metodo on pause
+                mBuilder = new Notification.Builder(this)
+                        .setSmallIcon(android.R.drawable.ic_media_play)
+                        .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText("Reproduciendo...")
+                        .addAction(android.R.drawable.ic_media_pause, "Stop", pplayIntent);
+
+
+            } else {
+
+                mBuilder = new Notification.Builder(this)
+                        .setSmallIcon(android.R.drawable.ic_media_play)
+                        .setLargeIcon(Bitmap.createScaledBitmap(icon, 128, 128, false))
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText("Pausado...")
+                        .addAction(android.R.drawable.ic_media_play, "Play", pplayIntent);
+
+
+            }
+
+            mBuilder.setContentIntent(pendingIntent);
+            mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
+            Log.i(LOG_TAG, "Clicked");
+
+        } else if (intent.getAction().equals(Constants.ACTION.PLAY_ACTION)) {
+            Log.i(LOG_TAG, "Clicked Play");
+
+        }
+
+
+        this.finish();
+
+
+    }
 
 
 }

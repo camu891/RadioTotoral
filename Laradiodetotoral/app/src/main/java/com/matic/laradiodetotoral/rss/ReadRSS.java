@@ -8,6 +8,7 @@ import android.speech.tts.Voice;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.matic.laradiodetotoral.R;
 import com.matic.laradiodetotoral.utils.Constants;
@@ -45,14 +46,15 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
         this.context=context;
         this.recyclerView=recyclerView;
         pd=new ProgressDialog(context);
-        pd.setMessage("Cargando...");
+        pd.setMessage(context.getString(R.string.str_loadingNews));
+
     }
 
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //pd.show();
+        pd.show();
     }
 
 
@@ -93,7 +95,11 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
                         } else if (current.getNodeName().equalsIgnoreCase("pubDate")) {
                             item.setPubDate(current.getTextContent());
                         }else if(current.getNodeName().equalsIgnoreCase("category")) {
-                            item.setCategory(current.getTextContent());}
+                            item.setCategory(current.getTextContent());
+                         }else if(current.getNodeName().equalsIgnoreCase("media:thumbnail")) {
+                            String url=current.getAttributes().item(0).getTextContent();//por ahora el rss no genera una imagen.
+                        item.setThumbnailUrl(url);}
+
 
                     }
 
@@ -137,7 +143,7 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-       // if (pd.isShowing()){pd.dismiss();}
+       if (pd.isShowing()){pd.dismiss();}
 
         RSSAdapter adapter=new RSSAdapter(context,feedItems);
 

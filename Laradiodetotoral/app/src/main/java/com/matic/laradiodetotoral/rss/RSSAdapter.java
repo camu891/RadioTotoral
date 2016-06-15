@@ -2,13 +2,20 @@ package com.matic.laradiodetotoral.rss;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.matic.laradiodetotoral.NewsDetailsActivity;
 import com.matic.laradiodetotoral.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -33,6 +40,8 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder>{
         private TextView tvCategoria;
         private TextView tvLink;
         private TextView tvPubDate;
+        private ImageView thumbnail;
+        private CardView cardView;
 
         public RSSViewHolder(View v) {
             super(v);
@@ -41,6 +50,10 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder>{
             tvCategoria= (TextView) v.findViewById(R.id.lbl_category);
             tvLink= (TextView) v.findViewById(R.id.lbl_link);
             tvPubDate= (TextView) v.findViewById(R.id.lbl_pubDate);
+            thumbnail= (ImageView) v.findViewById(R.id.thumbnail);
+
+            cardView= (CardView) v.findViewById(R.id.card_view);
+
         }
 
     }
@@ -56,11 +69,25 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder>{
     @Override
     public void onBindViewHolder(RSSViewHolder holder, int i) {
 
-        holder.tvTitle.setText(items.get(i).getTitle());
-        holder.tvDescripcion.setText(items.get(i).getDescripcion());
-        holder.tvCategoria.setText(items.get(i).getCategory());
-        holder.tvLink.setText(items.get(i).getLink());
-        holder.tvPubDate.setText(items.get(i).getPubDate());
+        final FeedItem currentItem=items.get(i);
+
+        YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
+
+        holder.tvTitle.setText(currentItem.getTitle());
+        holder.tvDescripcion.setText(currentItem.getDescripcion()+"...");
+        holder.tvCategoria.setText(currentItem.getCategory());
+        holder.tvLink.setText(currentItem.getLink());
+        holder.tvPubDate.setText(currentItem.getPubDate());
+        Picasso.with(context).load(currentItem.getThumbnailUrl()).into(holder.thumbnail);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent act=new Intent(context, NewsDetailsActivity.class);
+                act.putExtra("Link",currentItem.getLink());
+                context.startActivity(act);
+            }
+        });
 
 
     }
