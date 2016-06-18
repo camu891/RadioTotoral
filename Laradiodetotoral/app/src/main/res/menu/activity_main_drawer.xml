@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <group android:checkableBehavior="single">
+
+    <item android:title="">
+        <menu>
+            <item android:id="@+id/navLo_ultimo"
+                android:title="Lo último" />
+
+        </menu>
+    </item>
+
+
+
+
+        <item android:title="Noticias" >
+
+            <menu>
+        <item android:id="@+id/Nav_Not_Destacado"
+            android:title="Destacado" />
+        <item android:id="@+id/Nav_Not_Deporte"
+            android:title="Deporte" />
+        <item android:id="@+id/Nav_Not_Economia"
+            android:title="Economía" />
+        <item android:id="@+id/Nav_Not_Sociedad"
+            android:title="Sociedad" />
+            <item android:id="@+id/Nav_Not_Espectaculos"
+                android:title="Espectáculo" />
+            <item android:id="@+id/Nav_Not_Tecnologia"
+                android:title="Tecnología" />
+
+            </menu>
+        </item>
+
+
+
+    <item android:title="Sorteos">
+        <menu>
+            <item android:id="@+id/Nav_Participar"
+                android:title="Participar" />
+
+        </menu>
+    </item>
+
+
+    <item android:title="Contacto">
+        <menu>
+            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
+                android:title="Compartir" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+                android:title="Enviar email" />
+            <item android:id="@+id/nav_call" android:icon="@android:drawable/ic_menu_call"
+                android:title="Llamar" />
+        </menu>
+    </item>
+
+
+    </group>
+
+</menu>
