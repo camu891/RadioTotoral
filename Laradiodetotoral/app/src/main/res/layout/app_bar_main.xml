@@ -24,12 +24,15 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_gravity="top|end"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="33dp"
         android:layout_marginRight="16dp"
-        android:src="@android:drawable/ic_media_play" />
+        app:borderWidth="5dp"
+        app:backgroundTint="@color/colorGreenMT"
+        android:src="@drawable/ic_play"
+        app:fabSize="mini"/>
 
 
 

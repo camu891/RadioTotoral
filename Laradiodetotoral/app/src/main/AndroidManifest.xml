@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewsDetailsActivity"></activity>
+        <activity android:name=".NewsDetailsActivity" />
+        <activity android:name=".SorteoActivity"></activity>
     </application>
 
 </manifest>

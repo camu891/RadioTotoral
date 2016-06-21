@@ -7,12 +7,15 @@ import android.provider.DocumentsContract;
 import android.speech.tts.Voice;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.matic.laradiodetotoral.R;
 import com.matic.laradiodetotoral.utils.Constants;
 
+import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -89,11 +92,17 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
                         if (current.getNodeName().equalsIgnoreCase("title")) {
                             item.setTitle(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("description")) {
-                            item.setDescripcion(current.getTextContent());
+                            String desc=current.getTextContent();
+                            item.setDescripcion(Html.fromHtml(desc).toString());
+
                         } else if (current.getNodeName().equalsIgnoreCase("link")) {
                             item.setLink(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("pubDate")) {
-                            item.setPubDate(current.getTextContent());
+
+                            String fecha=current.getTextContent();
+                            String onlyDate=OnlyDate(fecha);
+
+                            item.setPubDate(onlyDate);
                         }else if(current.getNodeName().equalsIgnoreCase("category")) {
                             item.setCategory(current.getTextContent());
                          }else if(current.getNodeName().equalsIgnoreCase("media:thumbnail")) {
@@ -103,6 +112,8 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
 
                     }
 
+
+
                     feedItems.add(item);
 
                     Log.d("rssItems","items: "+item);
@@ -110,6 +121,40 @@ public class ReadRSS  extends AsyncTask<Void,Void,Void>{
                 }
             }
         }
+
+    }
+
+    public String OnlyDate(String date) {
+
+        String onlyDate = date.substring(0, 22);
+        CharSequence dias[] = {"Sun", "Mon", "Tue","Wed","Thu","Fri","Sat"};
+        Log.d("TAG Dias",dias.toString());
+
+        int i;
+        for (i=0;i<dias.length;i++)
+            if(onlyDate.contains(dias[i]))break;
+
+        switch (i){
+            case 0:
+                return onlyDate.replace("Sun", "Dom");
+            case 1:
+                return onlyDate.replace("Mon", "Lun");
+            case 2:
+                return onlyDate.replace("Tue", "Mar");
+            case 3:
+                return onlyDate.replace("Wed", "Mie");
+            case 4:
+                return onlyDate.replace("Thu", "Jue");
+            case 5:
+                return onlyDate.replace("Fri", "Vie");
+            case 6:
+                return onlyDate.replace("Sat", "Sab");
+        }
+
+
+
+        return onlyDate;
+
 
     }
 

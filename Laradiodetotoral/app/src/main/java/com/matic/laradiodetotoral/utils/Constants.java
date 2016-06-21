@@ -9,6 +9,10 @@ public class Constants {
 
     public static String URL_RSS="http://laradiodetotoral.com.ar/feed/";
 
+    public static String URL_RSS_LAVOZ="http://www.lavoz.com.ar/rss.xml";
+
+
+
 
 
     public interface ACTION {

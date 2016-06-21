@@ -1,5 +1,7 @@
 package com.matic.laradiodetotoral.rss;
 
+import android.text.Spanned;
+
 /**
  * Created by matic on 14/06/16.
  */

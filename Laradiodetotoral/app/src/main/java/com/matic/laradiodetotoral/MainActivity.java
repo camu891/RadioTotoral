@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matic.laradiodetotoral.rss.ReadRSS;
 import com.matic.laradiodetotoral.utils.Constants;
@@ -65,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        //Lector RSS
-
 
         // Obtener el Recycler
         recyclerView = (RecyclerView) findViewById(R.id.reciclador);
@@ -124,8 +122,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void actionPausePlay() {
         if (!playPause) {
-            btnPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
-            fab.setImageResource(android.R.drawable.ic_media_pause);
+
+            fab.setImageResource(R.drawable.ic_pause);
 
             if (intialStage)
                 new Player()
@@ -136,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             playPause = true;
         } else {
-            btnPlay.setBackgroundResource(android.R.drawable.ic_media_play);
-            fab.setImageResource(android.R.drawable.ic_media_play);
+
+            fab.setImageResource(R.drawable.ic_play);
             if (mediaPlayer.isPlaying())
                 mediaPlayer.pause();
             playPause = false;
@@ -169,7 +167,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return false;
+
+
+        switch(item.getItemId()){
+            case R.id.nav_Noticia_Destacado:
+                Toast.makeText(MainActivity.this, "Destacados", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_Participar:
+                Intent act=new Intent(this,SorteoActivity.class);
+                this.startActivity(act);
+                break;
+
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 
@@ -191,8 +205,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         // TODO Auto-generated method stub
                         intialStage = true;
                         playPause = false;
-                        btnPlay.setBackgroundResource(android.R.drawable.ic_media_play);
-                        fab.setImageResource(android.R.drawable.ic_media_play);
+
+                        fab.setImageResource(R.drawable.ic_play);
                         mediaPlayer.stop();
                         mediaPlayer.reset();
                     }
@@ -300,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
             Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                    R.mipmap.ic_launcher);
+                    R.drawable.ic_play);
 
 
             Intent playIntent = new Intent(this, MainActivity.class);
@@ -341,11 +355,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-
-        this.finish();
-
-
     }
+
 
 
 }
