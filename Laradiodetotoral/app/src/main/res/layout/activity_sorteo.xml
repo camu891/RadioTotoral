@@ -31,7 +31,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Documento"/>
+            android:hint="Documento"
+            android:inputType="number" />
 
         <EditText
             android:layout_width="match_parent"
@@ -42,7 +43,8 @@
             android:layout_alignParentEnd="true"
             android:hint="Descripción"
             android:lines="3"
-            android:maxLength="250"/>
+            android:maxLength="250"
+            android:gravity="top" />
 
 
         <Button
