@@ -1,0 +1,14 @@
+
+MRP.insert({
+'url':'http://200.105.111.160:8000/stream',
+'codec':'mp3',
+'volume':96,
+'autoplay':true,
+'buffering':5,
+'title':'La radio de totoral',
+'welcome':'Estas Escuchando',
+'bgcolor':'#A4D919',
+'skin':'radiovoz',
+'width':220,
+'height':69
+});
