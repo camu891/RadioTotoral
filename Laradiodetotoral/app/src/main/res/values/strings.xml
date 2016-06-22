@@ -7,4 +7,6 @@
     <string name="str_loading">Cargando...</string>
     <string name="str_loadingNews">Cargando últimas noticias...</string>
     <string name="str_lastNews">Últimas Noticias</string>
+    <string name="str_comments">Comentarios</string>
+    <string name="str_hint_comments">Ingrese algún comentario...</string>
 </resources>

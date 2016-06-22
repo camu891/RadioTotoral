@@ -177,6 +177,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent act=new Intent(this,SorteoActivity.class);
                 this.startActivity(act);
                 break;
+            case R.id.nav_chat:
+                Intent act_chat=new Intent(this,ChatActivity.class);
+                this.startActivity(act_chat);
+                break;
 
 
         }

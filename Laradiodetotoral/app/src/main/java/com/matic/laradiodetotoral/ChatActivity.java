@@ -1,79 +1,84 @@
 package com.matic.laradiodetotoral;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.matic.laradiodetotoral.adapters.ChatAdapter;
 import com.matic.laradiodetotoral.models.Chat;
+import com.matic.laradiodetotoral.rss.RSSAdapter;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SorteoActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
+
+    private RecyclerView.LayoutManager lManager;
+    private RecyclerView recyclerView;
+
 
     private String FIREBASE_URL = "https://estacionfm.firebaseio.com/";
 
+    @Bind(R.id.txtBox_comment)
+    EditText txtComments;
 
-    @Bind(R.id.txt_nombre)
-    EditText txtNombre;
-    @Bind(R.id.txt_doc)
-    EditText txtDoc;
-    @Bind(R.id.txt_descrip)
-    EditText txtDesc;
 
-    @Bind(R.id.listView)
-    ListView listview;
     private ArrayList<Chat> list;
 
     Firebase firebase;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sorteo);
+        setContentView(R.layout.activity_chat);
         //activar boton back
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         ButterKnife.bind(this);
         Firebase.setAndroidContext(this);
 
-        firebase=new Firebase(FIREBASE_URL).child("Sorteos");
+        firebase=new Firebase(FIREBASE_URL).child("Comentarios");
 
 
+        // Obtener el Recycler
+        recyclerView = (RecyclerView) findViewById(R.id.reciclador_chat);
+        recyclerView.setHasFixedSize(true);
 
         cargarListado();
-
     }
 
-
-    @OnClick(R.id.button)
+    @OnClick(R.id.btn_send)
     public void writeToFirebase() {
 
-        String name=txtNombre.getText().toString();
-        String doc=txtDoc.getText().toString();
-        String desc=txtDesc.getText().toString();
+        String comment=txtComments.getText().toString();
+        Date d=new Date();
+        SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String date= formatter.format(d.getTime());
+
 
         final HashMap<String, String> map1=new HashMap<String, String>();
-        map1.put("nombre",name);
-        map1.put("documento",doc);
-        map1.put("descripcion",desc);
+        map1.put("comment",comment);
+        map1.put("date",date);
         firebase.push().setValue(map1);
 
         vaciarCampos();
@@ -81,9 +86,8 @@ public class SorteoActivity extends AppCompatActivity {
 
 
     public void vaciarCampos(){
-        txtNombre.setText("");
-        txtDoc.setText("");
-        txtDesc.setText("");
+        txtComments.setText("");
+
 
     }
 
@@ -109,6 +113,8 @@ public class SorteoActivity extends AppCompatActivity {
 
                 ArrayList<String> lista = new ArrayList<String>();
 
+                list=new ArrayList<Chat>();
+
                 Map<String, Object> objectMap = (HashMap<String, Object>)
                         dataSnapshot.getValue();
 
@@ -116,29 +122,31 @@ public class SorteoActivity extends AppCompatActivity {
 
 
                     if (obj instanceof Map) {
+
                         Map<String, Object> mapObj = (Map<String, Object>) obj;
 
-                        String name = (String) mapObj.get("nombre");
-                        String doc = (String) mapObj.get("documento");
-                        String desc=(String) mapObj.get("descripcion");
+                        String com = (String) mapObj.get("comment");
+                        String fecha = (String) mapObj.get("date");
 
-                        Log.i("DATOSMAP", " nombre: "+name+"\n documento: "+doc+"\n descripcion: "+desc);
-
-                        //no puedo hacerlo andar con objetos chat
-
-                        lista.add("Nombre: "+name+"\nDocumento: "+doc+"\nDescripción: "+desc);
+                        list.add(new Chat(com,fecha));
 
 
                     }
                 }
 
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                        SorteoActivity.this,
-                        android.R.layout.simple_list_item_1,
-                        lista);
+                if(!list.isEmpty() || list!=null) {
+                    ChatAdapter adapter = new ChatAdapter(ChatActivity.this, list);
 
-                listview.setAdapter(adapter);
+                    // Usar un administrador para LinearLayout
+                    lManager = new LinearLayoutManager(ChatActivity.this);
+                    recyclerView.setLayoutManager(lManager);
+
+                    // Crear un nuevo adaptador
+                    recyclerView.setAdapter(adapter);
+                }else{
+                    Toast.makeText(ChatActivity.this,"NO HAY COMENTARIOS",Toast.LENGTH_SHORT).show();
+                }
 
                        /*String name = (String) dataSnapshot.child("nombre").getValue();
                         String doc = (String)  dataSnapshot.child("documento").getValue();
@@ -155,7 +163,6 @@ public class SorteoActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 

@@ -9,5 +9,6 @@
     <color name="ColorRadioTotoralWeb">#278900</color>
     <color name="colorBtn">#4b4b4b</color>
     <color name="colorGreenMT">#90c900</color>
+    <color name="ColorBgTxtBox">#e0dedddd</color>
 
 </resources>

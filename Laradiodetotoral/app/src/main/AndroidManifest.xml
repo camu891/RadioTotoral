@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewsDetailsActivity" />
-        <activity android:name=".SorteoActivity"></activity>
+        <activity android:name=".SorteoActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
