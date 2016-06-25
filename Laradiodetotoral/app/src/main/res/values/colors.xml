@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4b4b4b</color>
+    <color name="colorPrimary">#558b2f</color>
     <color name="colorPrimaryDark">#4b4b4b</color>
-    <color name="colorAccent">#90c900</color>
-    <color name="colorBackground">#e9e9e9</color>
+    <color name="colorAccent">#558b2f</color>
+    <color name="colorBackground">#d4d3d3</color>
     <color name="colorBackgroundTitle">#ac494949</color>
     <color name="ColorTxtLoading">#a5646464</color>
     <color name="ColorRadioTotoralWeb">#278900</color>
     <color name="colorBtn">#4b4b4b</color>
-    <color name="colorGreenMT">#90c900</color>
-    <color name="ColorBgTxtBox">#e0dedddd</color>
+    <color name="colorGreenAndroidMT">#558b2f</color>
+    <color name="colorGreenAppleMT">#90c900</color>
+    <color name="ColorBgTxtBox">#fadedddd</color>
+    <color name="ColorLigthGrey">#fddedddd</color>
+    <color name="colorDarkGrey">#4b4b4b</color>
+
 
 </resources>

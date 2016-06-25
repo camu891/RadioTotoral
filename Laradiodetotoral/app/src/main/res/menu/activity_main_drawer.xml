@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_Lo_ultimo"
-            android:title="Lo último" />
+            android:title="@string/str_Nav_Loultimo"
+            android:icon="@drawable/ic_menu_news"/>
     </group>
 
 
 
-        <item android:title="Noticias">
+        <item android:title="@string/str_Nav_Noticias">
+
+
             <menu>
                 <group android:checkableBehavior="single">
+
                 <item
                     android:id="@+id/nav_Noticia_Destacado"
-                    android:title="Destacado" />
-                <item
-                    android:id="@+id/nav_Noticia_Deporte"
-                    android:title="Deporte" />
-                <item
-                    android:id="@+id/nav_Noticia_Economia"
-                    android:title="Economía" />
+                    android:title="@string/str_Nav_Destacado" />
+
                 <item
                     android:id="@+id/nav_Noticia_Sociedad"
-                    android:title="Sociedad" />
+                    android:title="@string/str_Nav_Sociedad" />
                 <item
                     android:id="@+id/nav_Noticia_Espectaculos"
-                    android:title="Espectáculo" />
-                <item
-                    android:id="@+id/nav_Noticia_Tecnologia"
-                    android:title="Tecnología" />
+                    android:title="@string/str_Nav_Espectaculo" />
 
                 </group>
             </menu>
@@ -38,35 +33,64 @@
         </item>
 
 
-        <item android:title="Sorteos">
+
+
+        <item android:title="@string/str_Nav_Sorteo">
             <menu>
                 <item
                     android:id="@+id/nav_Participar"
-                    android:title="Participar" />
-                <item
-                    android:id="@+id/nav_chat"
-                    android:title="Chat en vivo" />
-
+                    android:title="@string/str_Nav_Participar"
+                    android:icon="@drawable/ic_menu_gift"/>
             </menu>
         </item>
 
 
-        <item android:title="Contacto">
+
+
+        <item android:title="@string/str_Nav_Contacto">
             <menu>
+
                 <item
-                    android:id="@+id/nav_share"
-                    android:icon="@android:drawable/ic_menu_share"
-                    android:title="Compartir" />
-                <item
-                    android:id="@+id/nav_send"
-                    android:icon="@android:drawable/ic_menu_send"
-                    android:title="Enviar email" />
+                    android:id="@+id/nav_comentarios"
+                    android:icon="@drawable/ic_menu_comment"
+                    android:title="@string/str_Nav_Comentarios" />
                 <item
                     android:id="@+id/nav_call"
-                    android:icon="@android:drawable/ic_menu_call"
-                    android:title="Llamar" />
+                    android:icon="@drawable/ic_menu_call"
+                    android:title="@string/str_Nav_Llamar" />
+
+                <item
+                    android:id="@+id/nav_whatsapp"
+                    android:icon="@drawable/ic_menu_whatsapp"
+                    android:title="@string/str_Nav_Whatsapp" />
+
+
             </menu>
         </item>
+
+
+
+    <item android:title="@string/str_Nav_Social">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/str_Nav_Compartir" />
+            <item
+                android:id="@+id/nav_facebook"
+                android:icon="@drawable/ic_menu_fb"
+                android:title="@string/str_Nav_Facebook" />
+            <item
+                android:id="@+id/nav_twitter"
+                android:icon="@drawable/ic_menu_tw"
+                android:title="@string/str_Nav_Twitter" />
+
+            <item
+                android:id="@+id/nav_web"
+                android:icon="@drawable/ic_menu_web"
+                android:title="@string/str_Nav_Web" />
+        </menu>
+    </item>
 
 
 

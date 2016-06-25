@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -158,9 +159,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-       /* if (id == R.id.action_settings) {
+        if (id == R.id.action_chat) {
+            Intent act_chat=new Intent(this,ChatActivity.class);
+            this.startActivity(act_chat);
             return true;
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -170,6 +173,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         switch(item.getItemId()){
+            case R.id.nav_Lo_ultimo:
+                ReadRSS readRSS = new ReadRSS(this, recyclerView);
+                readRSS.execute();
+                break;
             case R.id.nav_Noticia_Destacado:
                 Toast.makeText(MainActivity.this, "Destacados", Toast.LENGTH_SHORT).show();
                 break;
@@ -177,9 +184,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent act=new Intent(this,SorteoActivity.class);
                 this.startActivity(act);
                 break;
-            case R.id.nav_chat:
+            case R.id.nav_comentarios:
                 Intent act_chat=new Intent(this,ChatActivity.class);
                 this.startActivity(act_chat);
+                break;
+
+            //contacto
+            case R.id.nav_whatsapp:
+                Toast.makeText(MainActivity.this, "Whatsapp: 3524400576 / 3524400575 ", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_call:
+                Toast.makeText(MainActivity.this, "Tel: 03524470825 / 4700895", Toast.LENGTH_SHORT).show();
+                break;
+
+            //redes sociales
+            case R.id.nav_facebook:
+                Uri uri_fb = Uri.parse(getString(R.string.uri_app_fb));
+                Intent ifb = new Intent(Intent.ACTION_VIEW, uri_fb);
+                startActivity(ifb);
+                Toast.makeText(MainActivity.this, "Facebook Estacion fm", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_twitter:
+                Uri uri_tw = Uri.parse(getString(R.string.uri_app_tw));
+                Intent itw = new Intent(Intent.ACTION_VIEW, uri_tw);
+                startActivity(itw);
+                Toast.makeText(MainActivity.this, "Twitter Estacion fm", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_web:
+                Uri uri_web = Uri.parse(getString(R.string.url_app));
+                Intent iweb = new Intent(Intent.ACTION_VIEW, uri_web);
+                startActivity(iweb);
                 break;
 
 

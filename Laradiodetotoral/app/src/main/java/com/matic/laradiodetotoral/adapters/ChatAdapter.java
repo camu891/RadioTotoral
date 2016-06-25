@@ -60,7 +60,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
         final Chat currentItem=items.get(i);
 
-        YoYo.with(Techniques.FadeInUp).playOn(holder.cardView);
+        YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
 
         holder.tvComment.setText(currentItem.getComentario());
         holder.tvDate.setText(currentItem.getFecha());

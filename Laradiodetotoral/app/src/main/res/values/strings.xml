@@ -3,10 +3,49 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="app_name">La radio de Totoral</string>
+    <string name="url_app">http://www.laradiodetotoral.com.ar/</string>
+    <string name="uri_app_fb">https://www.facebook.com/estacionfm/?fref=ts</string>
+    <string name="uri_app_tw">https://twitter.com/estacionfmok</string>
     <string name="action_settings">Settings</string>
+    <string name="action_chat">Chat en vivo</string>
     <string name="str_loading">Cargando...</string>
     <string name="str_loadingNews">Cargando últimas noticias...</string>
+    <string name="str_loadingComments">Cargando comentarios...</string>
     <string name="str_lastNews">Últimas Noticias</string>
     <string name="str_comments">Comentarios</string>
-    <string name="str_hint_comments">Ingrese algún comentario...</string>
+    <string name="str_hint_comments">Escriba algún comentario...</string>
+
+    <!-- Sorteo -->
+    <string name="str_Sname">Nombre *</string>
+    <string name="str_Sdoc">Documento *</string>
+    <string name="str_Stel">Teléfono *</string>
+    <string name="str_Scoment">Comentario</string>
+    <string name="str_nota">Completa todos tus datos y participá por el sorteo vigente. Mucha Suerte!</string>
+    <string name="error_field_required">Este campo no puede estar vacío</string>
+    <string name="str_congrat">Felicitaciones, ya estás participando!</string>
+
+    <!-- NavBar -->
+    <string name="str_Nav_Loultimo">Lo último</string>
+    <string name="str_Nav_Noticias">Noticias</string>
+    <string name="str_Nav_Sorteo">Sorteos</string>
+    <string name="str_Nav_Destacado">Destacado</string>
+    <string name="str_Nav_Espectaculo">Espectáculo</string>
+    <string name="str_Nav_Sociedad">Sociedad</string>
+    <string name="str_Nav_Participar">Participar</string>
+    <string name="str_Nav_Contacto">Contacto</string>
+    <string name="str_Nav_Comentarios">Comentarios en vivo</string>
+    <string name="str_Nav_EnviarMail">Enviar mail</string>
+    <string name="str_Nav_Llamar">Llamar</string>
+    <string name="str_Nav_Whatsapp">Whatsapp</string>
+    <string name="str_Nav_Social">Social</string>
+    <string name="str_Nav_Compartir">Compartir</string>
+    <string name="str_Nav_Facebook">Facebook</string>
+    <string name="str_Nav_Twitter">Twitter</string>
+    <string name="str_Nav_Web">Sitio Web</string>
+
+
+
+
+
+
 </resources>

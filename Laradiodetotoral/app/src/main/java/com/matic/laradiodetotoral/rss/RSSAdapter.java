@@ -71,7 +71,7 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSViewHolder>{
 
         final FeedItem currentItem=items.get(i);
 
-        YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
+        YoYo.with(Techniques.BounceInUp).playOn(holder.cardView);
 
         holder.tvTitle.setText(currentItem.getTitle());
         holder.tvDescripcion.setText(currentItem.getDescripcion()+"...");

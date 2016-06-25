@@ -22,8 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewsDetailsActivity" />
-        <activity android:name=".SorteoActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".SorteoActivity"
+            android:label="@string/str_Nav_Sorteo"/>
+        <activity android:name=".ChatActivity"
+            android:label="@string/str_comments"></activity>
     </application>
 
 </manifest>

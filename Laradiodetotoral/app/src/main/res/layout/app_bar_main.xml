@@ -28,9 +28,9 @@
         android:layout_height="45dp"
         android:layout_gravity="top|end"
         android:layout_marginTop="33dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="55dp"
         app:borderWidth="5dp"
-        app:backgroundTint="@color/colorGreenMT"
+        app:backgroundTint="@color/colorDarkGrey"
         android:src="@drawable/ic_play"
         app:fabSize="mini"/>
 

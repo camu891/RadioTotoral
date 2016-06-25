@@ -7,13 +7,43 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.matic.laradiodetotoral.SorteoActivity">
+    tools:context="com.matic.laradiodetotoral.SorteoActivity"
+    android:background="@color/colorPrimaryDark">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_menu_gift"
+        android:translationZ="1dp"
+        android:rotation="-15"
+        android:layout_marginLeft="1dp"/>
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@color/colorGreenAndroidMT"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_nota"
+            android:layout_marginTop="-5dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#fff"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
         <EditText
             android:layout_width="match_parent"
@@ -22,7 +52,23 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Nombre"/>
+            android:hint="@string/str_Sname"
+            android:maxLines="1"
+            android:singleLine="true"
+
+           />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGreenAndroidMT"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
         <EditText
             android:layout_width="match_parent"
@@ -31,19 +77,65 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Documento"
-            android:inputType="number" />
+            android:hint="@string/str_Sdoc"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGreenAndroidMT"/>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_descrip"
+            android:id="@+id/txt_telefono"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:hint="Descripción"
-            android:maxLength="250"
-            android:gravity="top" />
+            android:hint="@string/str_Stel"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:inputType="phone"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGreenAndroidMT"/>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_coment"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:hint="@string/str_Scoment"
+                android:maxLength="250"
+                android:gravity="top" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
 
 
         <Button
@@ -51,13 +143,19 @@
             android:layout_height="wrap_content"
             android:text="Participar"
             android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_card_view_chat"
+            android:padding="10dp"
+            android:textColor="#fff"
+            android:layout_marginBottom="10dp"/>
 
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/listView"/>
+            android:id="@+id/listView"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
